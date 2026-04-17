@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import VideoCard from '../components/VideoCard'
 import { videoApi } from '../services/api'
 import './VideoDetail.css'
 
-export default function VideoDetail() {
+export default function VideoDetail({ isLoggedIn, isVipUser, onActivateVip }) {
   const { id } = useParams()
   const navigate = useNavigate()
   const [video, setVideo] = useState(null)
@@ -13,6 +12,23 @@ export default function VideoDetail() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isFavorited, setIsFavorited] = useState(false)
   const [activeTab, setActiveTab] = useState('intro')
+
+  const handlePlay = () => {
+    if (video?.isVip && !isVipUser) {
+      if (!isLoggedIn) {
+        window.alert('该内容为VIP专享，请先登录后观看')
+        return
+      }
+      const shouldActivate = window.confirm('该内容为VIP专享，是否立即开通VIP会员？')
+      if (!shouldActivate) return
+      const activated = onActivateVip?.()
+      if (activated !== true) {
+        window.alert('开通失败，请稍后重试')
+        return
+      }
+    }
+    setIsPlaying(true)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,14 +105,15 @@ export default function VideoDetail() {
               style={{ backgroundImage: `url(${video.coverUrl || `https://picsum.photos/seed/${id}/1280/720`})` }}
             >
               <div className="vd-thumbnail-overlay" />
-              <button className="vd-play-btn" onClick={() => setIsPlaying(true)}>
+              <button className="vd-play-btn" onClick={handlePlay}>
                 <PlayIcon />
                 <span>立即播放</span>
               </button>
-              {video.isVip && (
+              {video.isVip && !isVipUser && (
                 <div className="vd-vip-hint">
                   <span className="badge badge-vip">VIP</span>
                   <span>开通VIP会员即可免费观看</span>
+                  <button className="vd-vip-open-btn" onClick={handlePlay}>立即开通</button>
                 </div>
               )}
             </div>
@@ -111,6 +128,7 @@ export default function VideoDetail() {
           <div className="vd-meta">
             <div className="vd-badges">
               {video.isVip && <span className="badge badge-vip">VIP独家</span>}
+              {video.isVip && isVipUser && <span className="badge vd-member-badge">会员可看</span>}
               {video.isHot && <span className="badge badge-hot">热播</span>}
               {video.isNew && <span className="badge badge-new">最新</span>}
               {typeLabel[video.type] && (
@@ -155,7 +173,7 @@ export default function VideoDetail() {
 
             {/* Action buttons */}
             <div className="vd-actions">
-              <button className="vd-action-play" onClick={() => setIsPlaying(true)}>
+              <button className="vd-action-play" onClick={handlePlay}>
                 <PlayIcon />
                 立即播放
               </button>

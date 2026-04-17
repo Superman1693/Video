@@ -97,6 +97,20 @@
   white-space: nowrap;
 }
 
+.vd-vip-open-btn {
+  padding: 4px 10px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vd-member-badge {
+  background: rgba(0, 178, 255, 0.18);
+  color: #7bd6ff;
+}
+
 /* Main layout */
 .vd-main {
   display: grid;

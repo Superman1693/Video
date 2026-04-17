@@ -121,6 +121,16 @@
   box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5);
 }
 
+.home__vip-btn--opened {
+  background: linear-gradient(135deg, #ffe17a, #ffd24f);
+  cursor: default;
+}
+
+.home__vip-btn--opened:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 @media (max-width: 600px) {
   .home__vip-banner-content {
     flex-wrap: wrap;
