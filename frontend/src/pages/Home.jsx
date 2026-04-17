@@ -4,7 +4,7 @@ import VideoRow from '../components/VideoRow'
 import { videoApi, bannerApi } from '../services/api'
 import './Home.css'
 
-export default function Home() {
+export default function Home({ isLoggedIn, isVip, onActivateVip }) {
   const [banners, setBanners] = useState([])
   const [hotVideos, setHotVideos] = useState([])
   const [newVideos, setNewVideos] = useState([])
@@ -42,6 +42,19 @@ export default function Home() {
     fetchAll()
   }, [])
 
+  const handleOpenVip = () => {
+    if (!isLoggedIn) {
+      window.alert('请先登录后再开通VIP会员')
+      return
+    }
+    if (isVip) {
+      window.alert('您已是VIP会员')
+      return
+    }
+    onActivateVip?.()
+    window.alert('VIP会员开通成功')
+  }
+
   return (
     <div className="home page-enter">
       {/* Banner */}
@@ -76,10 +89,15 @@ export default function Home() {
           <div className="home__vip-banner-content">
             <div className="home__vip-badge">VIP</div>
             <div className="home__vip-text">
-              <h3>开通腾讯视频VIP会员</h3>
-              <p>海量影视免费看 · 4K超清画质 · 无广告体验</p>
+              <h3>{isVip ? '您已开通腾讯视频VIP会员' : '开通腾讯视频VIP会员'}</h3>
+              <p>{isVip ? '尊享4K超清、无广告、VIP专享影视内容' : '海量影视免费看 · 4K超清画质 · 无广告体验'}</p>
             </div>
-            <button className="home__vip-btn">立即开通 ¥25/月</button>
+            <button
+              className={`home__vip-btn ${isVip ? 'home__vip-btn--opened' : ''}`}
+              onClick={handleOpenVip}
+            >
+              {isVip ? 'VIP已开通' : '立即开通 ¥25/月'}
+            </button>
           </div>
         </div>
 

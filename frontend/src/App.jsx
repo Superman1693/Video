@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -7,15 +8,72 @@ import Search from './pages/Search'
 import Category from './pages/Category'
 import './App.css'
 
+const USER_STORAGE_KEY = 'video-app-user'
+
 export default function App() {
+  const [user, setUser] = useState(loadUserFromStorage)
+  const isLoggedIn = Boolean(user?.username)
+  const isVip = Boolean(user?.isVip)
+
+  const handleLogin = (username) => {
+    const nextUser = {
+      username,
+      isVip: user?.isVip || false,
+      vipOpenedAt: user?.vipOpenedAt || null,
+    }
+    setUser(nextUser)
+    saveUserToStorage(nextUser)
+  }
+
+  const handleLogout = () => {
+    setUser(null)
+    localStorage.removeItem(USER_STORAGE_KEY)
+  }
+
+  const handleActivateVip = () => {
+    if (!user) return false
+    if (user.isVip) return true
+    const nextUser = {
+      ...user,
+      isVip: true,
+      vipOpenedAt: new Date().toISOString(),
+    }
+    setUser(nextUser)
+    saveUserToStorage(nextUser)
+    return true
+  }
+
   return (
     <BrowserRouter>
       <div className="app">
-        <Header />
+        <Header
+          user={user}
+          onLogin={handleLogin}
+          onLogout={handleLogout}
+          onActivateVip={handleActivateVip}
+        />
         <main className="app__main">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/video/:id" element={<VideoDetail />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  isLoggedIn={isLoggedIn}
+                  isVip={isVip}
+                  onActivateVip={handleActivateVip}
+                />
+              }
+            />
+            <Route
+              path="/video/:id"
+              element={
+                <VideoDetail
+                  isLoggedIn={isLoggedIn}
+                  isVipUser={isVip}
+                  onActivateVip={handleActivateVip}
+                />
+              }
+            />
             <Route path="/search" element={<Search />} />
             <Route path="/category/:slug" element={<Category />} />
             <Route path="*" element={<NotFound />} />
@@ -25,6 +83,20 @@ export default function App() {
       </div>
     </BrowserRouter>
   )
+}
+
+function loadUserFromStorage() {
+  const raw = localStorage.getItem(USER_STORAGE_KEY)
+  if (!raw) return null
+  try {
+    return JSON.parse(raw)
+  } catch {
+    return null
+  }
+}
+
+function saveUserToStorage(user) {
+  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
 }
 
 function NotFound() {
