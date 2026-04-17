@@ -263,6 +263,11 @@
   font-size: 12px;
 }
 
+.header__auth-tip {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
 .header__auth-actions {
   display: flex;
   justify-content: flex-end;

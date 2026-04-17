@@ -212,10 +212,11 @@ export default function Header({ user, onLogin, onLogout, onActivateVip }) {
               />
               <input
                 type="password"
-                placeholder="请输入密码（至少6位）"
+                placeholder="请输入密码"
                 value={formData.password}
                 onChange={e => setFormData(prev => ({ ...prev, password: e.target.value }))}
               />
+              <div className="header__auth-tip">密码长度至少6位</div>
               {authError && <div className="header__auth-error">{authError}</div>}
               <div className="header__auth-actions">
                 <button type="button" onClick={() => setAuthDialogOpen(false)}>取消</button>
