@@ -1,0 +1,164 @@
+/* ================================
+   Global Styles - Tencent Video Theme
+   ================================ */
+:root {
+  --bg-primary: #0d0d1a;
+  --bg-secondary: #141428;
+  --bg-tertiary: #1e1e38;
+  --bg-card: #1a1a30;
+  --bg-hover: #252540;
+  --accent-primary: #00b2ff;
+  --accent-secondary: #0086cc;
+  --accent-glow: rgba(0, 178, 255, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: #c0c0d0;
+  --text-muted: #7070a0;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(0, 178, 255, 0.2);
+  --gradient-header: linear-gradient(180deg, rgba(13, 13, 26, 0.98) 0%, rgba(13, 13, 26, 0.8) 100%);
+  --gradient-card: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 60%);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition: all 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.text-accent {
+  color: var(--accent-primary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge-vip {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+}
+
+.badge-hot {
+  background: linear-gradient(135deg, #ff4444, #ff2020);
+  color: #fff;
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #00b2ff, #0086cc);
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: fadeIn 0.4s ease;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.rating {
+  color: #FFD700;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  background: rgba(0, 178, 255, 0.1);
+  border: 1px solid rgba(0, 178, 255, 0.3);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--accent-primary);
+  margin: 2px;
+}

@@ -1,0 +1,133 @@
+.home__categories {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 64px;
+  z-index: 100;
+}
+
+.home__category-list {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 12px 0;
+  scrollbar-width: none;
+}
+
+.home__category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.home__category-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.home__category-item:hover {
+  color: var(--accent-primary);
+  background: rgba(0, 178, 255, 0.08);
+}
+
+.home__category-icon {
+  font-size: 18px;
+}
+
+.home__main {
+  padding-top: 48px;
+  padding-bottom: 20px;
+}
+
+/* VIP Banner */
+.home__vip-banner {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #1a1040, #2d1a60, #1a1040);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home__vip-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+}
+
+.home__vip-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.home__vip-badge {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  color: #000;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(255, 165, 0, 0.4);
+}
+
+.home__vip-text {
+  flex: 1;
+}
+
+.home__vip-text h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFD700;
+  margin-bottom: 4px;
+}
+
+.home__vip-text p {
+  font-size: 13px;
+  color: rgba(255, 215, 0, 0.7);
+}
+
+.home__vip-btn {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border-radius: 25px;
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.home__vip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5);
+}
+
+@media (max-width: 600px) {
+  .home__vip-banner-content {
+    flex-wrap: wrap;
+  }
+
+  .home__vip-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
