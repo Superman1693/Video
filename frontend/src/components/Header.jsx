@@ -59,8 +59,8 @@ export default function Header({ user, onLogin, onLogout, onActivateVip }) {
       window.alert('您已是VIP会员')
       return
     }
-    onActivateVip?.()
-    window.alert('VIP会员开通成功')
+    const activated = onActivateVip?.()
+    window.alert(activated ? 'VIP会员开通成功' : '开通失败，请稍后重试')
   }
 
   const handleSubmitLogin = (e) => {

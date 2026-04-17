@@ -32,7 +32,7 @@ export default function App() {
 
   const handleActivateVip = () => {
     if (!user) return false
-    if (user.isVip) return true
+    if (user.isVip) return false
     const nextUser = {
       ...user,
       isVip: true,
