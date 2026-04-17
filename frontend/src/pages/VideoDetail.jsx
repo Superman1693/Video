@@ -124,7 +124,7 @@ export default function VideoDetail({ isLoggedIn, isVipUser, onActivateVip }) {
           <div className="vd-meta">
             <div className="vd-badges">
               {video.isVip && <span className="badge badge-vip">VIP独家</span>}
-              {video.isVip && isVipUser && <span className="badge badge-new">会员可看</span>}
+              {video.isVip && isVipUser && <span className="badge vd-member-badge">会员可看</span>}
               {video.isHot && <span className="badge badge-hot">热播</span>}
               {video.isNew && <span className="badge badge-new">最新</span>}
               {typeLabel[video.type] && (
