@@ -19,7 +19,7 @@ export default function App() {
     const nextUser = {
       username,
       isVip: user?.isVip || false,
-      vipOpenedAt: user?.vipOpenedAt || null,
+      vipActivatedAt: user?.vipActivatedAt || null,
     }
     setUser(nextUser)
     saveUserToStorage(nextUser)
@@ -36,7 +36,7 @@ export default function App() {
     const nextUser = {
       ...user,
       isVip: true,
-      vipOpenedAt: new Date().toISOString(),
+      vipActivatedAt: new Date().toISOString(),
     }
     setUser(nextUser)
     saveUserToStorage(nextUser)
