@@ -18,8 +18,8 @@ export default function App() {
   const handleLogin = (username) => {
     const nextUser = {
       username,
-      isVip: user?.isVip || false,
-      vipActivatedAt: user?.vipActivatedAt || null,
+      isVip: false,
+      vipActivatedAt: null,
     }
     setUser(nextUser)
     saveUserToStorage(nextUser)

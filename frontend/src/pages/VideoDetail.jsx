@@ -21,7 +21,11 @@ export default function VideoDetail({ isLoggedIn, isVipUser, onActivateVip }) {
       }
       const shouldActivate = window.confirm('该内容为VIP专享，是否立即开通VIP会员？')
       if (!shouldActivate) return
-      onActivateVip?.()
+      const activated = onActivateVip?.()
+      if (activated !== true) {
+        window.alert('开通失败，请稍后重试')
+        return
+      }
     }
     setIsPlaying(true)
   }
